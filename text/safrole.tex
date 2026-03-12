@@ -110,7 +110,7 @@ The set of validator keys itself is equivalent to the set of 336-octet sequences
   \forall \vkX \in \valkey : \vkX_\vk¬metadata \in \metadatakey &\equiv \vkX\subrange{208}{128}
 \end{align}
 
-With a new epoch under regular conditions, validator keys get rotated and the epoch's Bandersnatch key root is updated into $\epochroot'$:
+With a new epoch under regular conditions, validator keys get rotated and the epoch's Bandersnatch ring root is updated into $\epochroot'$:
 \begin{align}
   \tup{\pendingset', \activeset', \previousset', \epochroot'} &\equiv \begin{cases}
     (\Phi(\stagingset), \pendingset, \activeset, z) &\when e' > e \\ \tup{\pendingset, \activeset, \previousset, \epochroot} &\otherwise
