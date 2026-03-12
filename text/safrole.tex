@@ -90,7 +90,7 @@ As we state in section \ref{sec:sealandentropy}, Safrole requires that every blo
 \subsection{Key Rotation}
 \label{sec:keyrotation}
 
-In addition to the active sequence of validator keys $\activeset$ and staging sequence $\stagingset$, internal to the Safrole state we retain a pending sequence $\pendingset$. The active validator key sequence identifies the nodes which are currently privileged to author blocks and carry out the validation processes, whereas the pending sequence $\pendingset$, which is reset to $\stagingset$ at the beginning of each epoch, is the sequence of keys which will be active in the next epoch and which determine the Bandersnatch ring root which authorizes tickets into the sealing-key contest for the next epoch.
+In addition to the active sequence of validator keys $\activeset$ and staging sequence $\stagingset$, internal to the Safrole state we retain a pending sequence $\pendingset$. The active validator key sequence identifies the nodes which are currently privileged to author blocks and carry out the validation processes, whereas the pending sequence $\pendingset$, which is reset to $\stagingset$ at the beginning of each epoch, is the sequence of keys which will be active in the next epoch and which determine the Bandersnatch ring root which authorizes tickets into the slot-sealer contest for the next epoch.
 \begin{align}
   \label{eq:validatorkeys}
   \stagingset \in \allvalkeys \;,\quad
@@ -214,7 +214,7 @@ Here, we use $Z$ as the outside-in sequencer function, defined as follows:
   }
 \end{equation}
 
-Finally, $F$ is the fallback key sequence function which selects an epoch's worth of validator Bandersnatch keys ($\sequence[\Cepochlen]{\bskey}$) from the validator key set $\mathbf{k}$ using the entropy collected on-chain $r$:
+Finally, $F$ is the fallback key sequence function which selects an epoch's worth of validator Bandersnatch keys ($\sequence[\Cepochlen]{\bskey}$) from the validator key sequence $\mathbf{k}$ using the entropy collected on-chain $r$:
 \begin{equation}
   \label{eq:fallbackkeysequence}
   F\colon \abracegroup[\ ]{
@@ -282,7 +282,7 @@ The winning-tickets marker $\H_\¬winnersmark$ is either empty or, if the block 
 
 The extrinsic $\xttickets$ is a sequence of proofs of valid tickets; a ticket implies an entry in our epochal ``contest'' to determine which validators are privileged to author a block for each timeslot in the following epoch. Tickets specify an entry index (a natural number less than $\Cticketentries$) together with a proof of ticket's validity. The proof implies a ticket identifier, a high-entropy unbiasable 32-octet sequence, which is used both as a score in the aforementioned contest and as input for the block's entropy source $\textsc{vrf}$ signature.
 
-Towards the end of the epoch (\ie $\Cepochtailstart$ slots from the start) this contest is closed implying successive blocks within the same epoch must have an empty tickets extrinsic. At this point, the following epoch's seal key sequence becomes fixed.
+Towards the end of the epoch (\ie $\Cepochtailstart$ slots from the start) this contest is closed implying successive blocks within the same epoch must have an empty tickets extrinsic. At this point, the following epoch's slot-sealer sequence becomes fixed.
 
 Formally:
 \begin{align}
