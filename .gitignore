@@ -17,3 +17,5 @@ releases/
 *.xml
 *.png
 *.svg
+
+build/
